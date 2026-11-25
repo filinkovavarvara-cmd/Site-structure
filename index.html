@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Структура сайта — Евгения Баянова</title>
+  <style>
+    :root { color-scheme: light; --paper:#f6f5f0; --panel:#fff; --ink:#222622; --muted:#515851; --rule:#d5d9d2; --accent:#315744; --tint:#e5eee7; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:1rem/1.55 system-ui,sans-serif; }
+    main { max-width:52rem; margin:auto; padding:clamp(1rem,5vw,3rem); }
+    header { border-top:4px solid var(--accent); padding-top:1.25rem; }
+    .eyebrow { color:var(--accent); font-size:.78rem; font-weight:750; letter-spacing:.09em; text-transform:uppercase; }
+    h1,h2 { line-height:1.12; text-wrap:balance; }
+    h1 { font-size:clamp(2.2rem,7vw,4rem); margin:.2em 0 .4em; letter-spacing:-.045em; }
+    h2 { margin:0; font-size:clamp(1.35rem,4vw,1.9rem); letter-spacing:-.025em; }
+    p { margin:.6rem 0; }
+    .intro { font-size:1.1rem; max-width:39rem; }
+    .hint { color:var(--muted); font-size:.9rem; }
+    a { color:var(--accent); text-underline-offset:.18em; }
+    a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    nav, section, footer { margin-top:1.25rem; padding:clamp(1rem,4vw,1.6rem); border:1px solid var(--rule); background:var(--panel); }
+    nav ol { padding-left:1.4rem; margin:.35rem 0 .8rem; }
+    .heading { display:flex; align-items:baseline; gap:.65rem; }
+    .num { display:inline-block; background:var(--tint); color:var(--accent); font-weight:750; }
+    .num { padding:.15rem .45rem; font-size:.82rem; }
+    .why { color:var(--muted); }
+    figure { margin:1rem 0; }
+    .wf {
+      container-type:inline-size; display:grid; gap:clamp(.55rem,2vw,1.1rem);
+      padding:clamp(.7rem,3vw,1.65rem); border:1px solid #dedfd9; border-radius:.5rem;
+      background:#f4f4f0; --wf-edge:#d5d9d1; --wf-line:#c5ccc2; --wf-ink:#828e84;
+    }
+    .wf-grid { display:grid; gap:2.5cqw; }
+    .wf-split { grid-template-columns:minmax(0, 1fr) minmax(0, 1.05fr); align-items:center; gap:5cqw; }
+    .wf-three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .wf-five { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    .wf-stack { display:grid; gap:clamp(.24rem,1.25cqw,.55rem); align-content:center; min-width:0; }
+    .wf-row { display:flex; align-items:center; gap:2cqw; }
+    .wf-nav { padding-bottom:2.5cqw; border-bottom:1px solid var(--wf-edge); }
+    .wf-nav > :first-child { margin-inline-end:auto; }
+    .wf-line,.wf-title,.wf-button,.wf-dot,.wf-tab,.wf-field { display:block; border-radius:.18rem; width:var(--w,85%); }
+    .wf-line { height:clamp(.15rem,.75cqw,.34rem); background:var(--wf-line); }
+    .wf-title { height:clamp(.27rem,1.6cqw,.7rem); background:var(--wf-ink); }
+    .wf-button { height:clamp(.55rem,3.9cqw,1.55rem); background:#687c6c; }
+    .wf-tab,.wf-field { height:clamp(.6rem,4.3cqw,1.7rem); border:1px solid var(--wf-edge); background:#fff; }
+    .wf-tab:first-child { background:#dce5dc; border-color:#bdcbbd; }
+    .wf-field { width:100%; }
+    .wf-media {
+      display:grid; place-items:center; aspect-ratio:var(--ratio, 16 / 10);
+      border:1px solid var(--wf-edge); border-radius:.28rem; background:#e4e8e1;
+    }
+    .wf-play::after {
+      content:""; width:clamp(.45rem,2cqw,.85rem); aspect-ratio:1; background:#7f8c82;
+      clip-path:polygon(14% 0,100% 50%,14% 100%);
+    }
+    .wf-card { padding:clamp(.22rem,1.55cqw,.65rem); border:1px solid var(--wf-edge); border-radius:.3rem; background:#fff; }
+    .wf-dot { width:clamp(.45rem,2.8cqw,1.2rem); aspect-ratio:1; border-radius:50%; background:#8e9c90; }
+    .wf-step { padding-top:1.5cqw; border-top:1px solid #c4cdc2; }
+    .wf-center { justify-self:center; margin-top:1cqw; }
+    ul { margin:.5rem 0 0; padding-left:1.2rem; }
+    li + li { margin-top:.3rem; }
+    @media print { body { background:#fff; } main { max-width:none; padding:0; } h2 { break-after:avoid; } figure { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Евгения Баянова · черновик для обсуждения</div>
+    <h1>Структура сайта</h1>
+    <p class="intro">Сайт-портфолио ведущей и организатора мероприятий из Екатеринбурга и Верхней Пышмы. Посетитель видит Евгению в работе, находит близкий ему формат и решает, хочет ли обсудить свой праздник.</p>
+    <p class="hint">Схемы показывают порядок и состав блоков, а не дизайн.</p>
+  </header>
+
+  <nav aria-labelledby="contents">
+    <h2 id="contents">Порядок блоков</h2>
+    <p><strong>Главная:</strong> в шапке — имя (ссылка на главную), «Портфолио», «Полезное» и заметная кнопка связи.</p>
+    <ol>
+      <li><a href="#cover">Первый экран</a></li>
+      <li><a href="#about">Знакомство с Евгенией</a></li>
+      <li><a href="#events">Мероприятия</a></li>
+      <li><a href="#process">Организация праздника</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#price">Стоимость</a></li>
+      <li><a href="#contact">Финальный контакт</a></li>
+    </ol>
+    <p><strong>Отдельные разделы:</strong> <a href="#portfolio">Портфолио</a> и <a href="#articles">Полезное</a>. Страницы контактов нет.</p>
+  </nav>
+
+  <section id="cover" aria-labelledby="cover-title">
+    <div class="heading"><span class="num" aria-hidden="true">01</span><h2 id="cover-title">Первый экран</h2></div>
+    <p class="why">За несколько секунд понятно, кто такая Евгения, где она работает и как с ней связаться.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <div class="wf-row wf-nav"><span class="wf-title" style="--w:18%"></span><span class="wf-line" style="--w:10%"></span><span class="wf-line" style="--w:8%"></span><span class="wf-button" style="--w:14%"></span></div>
+        <div class="wf-grid wf-split">
+          <div class="wf-stack"><span class="wf-title"></span><span class="wf-title" style="--w:65%"></span><span class="wf-line"></span><span class="wf-line" style="--w:58%"></span><span class="wf-button" style="--w:51%"></span></div>
+          <div class="wf-media wf-play" style="--ratio:4 / 3"></div>
+        </div>
+      </div>
+    </figure>
+    <ul>
+      <li><strong>Имя и позиционирование:</strong> Евгения Баянова. «Ваше событие. Моя сцена».</li>
+      <li><strong>Короткое пояснение:</strong> ведёт и организует мероприятия в Екатеринбурге и Верхней Пышме.</li>
+      <li><strong>Материал:</strong> портрет или короткий живой фрагмент с мероприятия.</li>
+    </ul>
+  </section>
+
+  <section id="about" aria-labelledby="about-title">
+    <div class="heading"><span class="num" aria-hidden="true">02</span><h2 id="about-title">Знакомство с Евгенией</h2></div>
+    <p class="why">Посетитель знакомится с Евгенией и понимает, какой будет атмосфера на её мероприятии.</p>
+    <figure>
+      <div class="wf" aria-hidden="true"><div class="wf-grid wf-split"><div class="wf-media" style="--ratio:5 / 4"></div><div class="wf-stack"><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:94%"></span><span class="wf-line" style="--w:66%"></span></div></div></div>
+    </figure>
+    <ul>
+      <li><strong>«Тонкая игра»:</strong> Евгения вовлекает гостей без давления и оставляет пространство тем, кто хочет просто общаться.</li>
+      <li><strong>Режиссура и музыка:</strong> сценарий задаёт ритм праздника, а живой вокал может естественно стать частью программы.</li>
+      <li><strong>Опыт:</strong> 20 лет.</li>
+      <li><strong>Материал:</strong> портрет и, если есть подходящий фрагмент, короткое видео общения с гостями или выступления.</li>
+    </ul>
+  </section>
+
+  <section id="events" aria-labelledby="events-title">
+    <div class="heading"><span class="num" aria-hidden="true">03</span><h2 id="events-title">Мероприятия</h2></div>
+    <p class="why">Посетитель видит реальные праздники и может сразу открыть пример, похожий на его событие.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <span class="wf-title" style="--w:27%"></span>
+        <div class="wf-grid wf-three">
+          <div class="wf-card wf-stack"><div class="wf-media"></div><span class="wf-title" style="--w:62%"></span><span class="wf-line"></span></div>
+          <div class="wf-card wf-stack"><div class="wf-media wf-play"></div><span class="wf-title" style="--w:57%"></span><span class="wf-line"></span></div>
+          <div class="wf-card wf-stack"><div class="wf-media"></div><span class="wf-title" style="--w:69%"></span><span class="wf-line"></span></div>
+        </div>
+        <span class="wf-button wf-center" style="--w:24%"></span>
+      </div>
+    </figure>
+    <ul>
+      <li><strong>Карточка:</strong> фото или видео, название события, одна фраза об идее и короткая цитата, если есть согласованный отзыв.</li>
+      <li>Карточка ведёт к событию или нужной категории на отдельной странице портфолио.</li>
+      <li><strong>Материалы:</strong> реальные примеры свадеб, корпоративов и юбилеев — три основных направления сайта.</li>
+    </ul>
+  </section>
+
+  <section id="process" aria-labelledby="process-title">
+    <div class="heading"><span class="num" aria-hidden="true">04</span><h2 id="process-title">Организация праздника</h2></div>
+    <p class="why">Показать, что Евгения может не только провести праздник, но и помочь с подготовкой: придумать концепцию, собрать команду и согласовать детали.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <span class="wf-title" style="--w:34%"></span>
+        <div class="wf-grid wf-five">
+          <div class="wf-stack wf-step"><span class="wf-dot"></span><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:56%"></span></div>
+          <div class="wf-stack wf-step"><span class="wf-dot"></span><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:56%"></span></div>
+          <div class="wf-stack wf-step"><span class="wf-dot"></span><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:56%"></span></div>
+          <div class="wf-stack wf-step"><span class="wf-dot"></span><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:56%"></span></div>
+          <div class="wf-stack wf-step"><span class="wf-dot"></span><span class="wf-title" style="--w:64%"></span><span class="wf-line"></span><span class="wf-line" style="--w:56%"></span></div>
+        </div>
+      </div>
+    </figure>
+    <ul>
+      <li><strong>Знакомство и идея:</strong> бесплатная встреча без обязательств, разговор о пожеланиях и формате.</li>
+      <li><strong>Концепция и сценарий:</strong> идея праздника, программа и тайминг.</li>
+      <li><strong>Команда и подготовка:</strong> Евгения работает со своим DJ; для события может подобрать артистов, фото- и видеоспециалистов, декор и других подрядчиков.</li>
+      <li><strong>Согласование и проведение:</strong> уточнение деталей, контрольный звонок накануне и работа на мероприятии.</li>
+    </ul>
+  </section>
+
+  <section id="reviews" aria-labelledby="reviews-title">
+    <div class="heading"><span class="num" aria-hidden="true">05</span><h2 id="reviews-title">Отзывы</h2></div>
+    <p class="why">Подтвердить впечатление от фото и видео словами гостей и заказчиков.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <span class="wf-title" style="--w:21%"></span>
+        <div class="wf-grid wf-three">
+          <div class="wf-card wf-stack"><span class="wf-dot"></span><span class="wf-line"></span><span class="wf-line" style="--w:96%"></span><span class="wf-line" style="--w:67%"></span></div>
+          <div class="wf-card wf-stack"><span class="wf-dot"></span><span class="wf-line"></span><span class="wf-line" style="--w:92%"></span><span class="wf-line" style="--w:62%"></span></div>
+          <div class="wf-card wf-stack"><span class="wf-dot"></span><span class="wf-line"></span><span class="wf-line" style="--w:96%"></span><span class="wf-line" style="--w:71%"></span></div>
+        </div>
+      </div>
+    </figure>
+    <ul>
+      <li>Подобрать свежие отзывы, где видны конкретные детали: тактичность, внимание к разным поколениям, музыка, возможность спокойно общаться.</li>
+      <li>Показать несколько коротких цитат. Полный отзыв можно раскрыть, если он добавляет контекст.</li>
+      <li>Отзыв о конкретном событии разместить рядом с его фото в портфолио, если есть разрешение на публикацию.</li>
+    </ul>
+  </section>
+
+  <section id="price" aria-labelledby="price-title">
+    <div class="heading"><span class="num" aria-hidden="true">06</span><h2 id="price-title">Стоимость</h2></div>
+    <p class="why">Объяснить, почему стоимость может отличаться, и дать простой способ узнать ориентир для своего события.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <span class="wf-title" style="--w:26%"></span>
+        <div class="wf-grid wf-three">
+          <div class="wf-card wf-stack"><span class="wf-line" style="--w:58%"></span><span class="wf-title" style="--w:75%"></span></div>
+          <div class="wf-card wf-stack"><span class="wf-line" style="--w:66%"></span><span class="wf-title" style="--w:75%"></span></div>
+          <div class="wf-card wf-stack"><span class="wf-line" style="--w:62%"></span><span class="wf-title" style="--w:75%"></span></div>
+        </div>
+        <span class="wf-line"></span><span class="wf-button wf-center" style="--w:31%"></span>
+      </div>
+    </figure>
+    <ul>
+      <li><strong>Ведущая + DJ:</strong> свадьба — от 55&nbsp;000&nbsp;₽, корпоратив — от 55&nbsp;000&nbsp;₽, юбилей — от 38&nbsp;000&nbsp;₽. Дополнительные музыканты и артисты в эти цены не входят.</li>
+      <li>Итоговая стоимость зависит от даты и сезона, места проведения, количества гостей и длительности.</li>
+      <li>Кнопка «Узнать стоимость своего мероприятия» ведёт к форме ниже. Калькулятора нет: Евгения получает детали и сама предлагает подходящий вариант.</li>
+    </ul>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="heading"><span class="num" aria-hidden="true">07</span><h2 id="contact-title">Финальный контакт</h2></div>
+    <p class="why">Предложить два равноправных способа начать разговор: написать напрямую или оставить заявку.</p>
+    <figure>
+      <div class="wf" aria-hidden="true"><div class="wf-grid wf-split">
+        <div class="wf-stack"><span class="wf-title" style="--w:72%"></span><span class="wf-line" style="--w:62%"></span><span class="wf-button" style="--w:58%"></span></div>
+        <div class="wf-card wf-stack"><div class="wf-grid wf-three"><span class="wf-field"></span><span class="wf-field"></span><span class="wf-field"></span></div><div class="wf-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))"><span class="wf-field"></span><span class="wf-field"></span></div><span class="wf-button" style="--w:54%"></span></div>
+      </div></div>
+    </figure>
+    <ul>
+      <li><strong>Форма:</strong> формат, дата, город или площадка, примерное число гостей, имя и контакт для ответа. Длительность можно указать по желанию.</li>
+      <li><strong>Прямая связь:</strong> рядом с формой — возможность написать Евгении напрямую.</li>
+    </ul>
+  </section>
+
+  <section id="portfolio" aria-labelledby="portfolio-title">
+    <div class="heading"><span class="num" aria-hidden="true">А</span><h2 id="portfolio-title">Портфолио</h2></div>
+    <p class="why">Отдельная страница продолжает блок «Мероприятия»: здесь можно выбрать формат и посмотреть больше примеров.</p>
+    <figure>
+      <div class="wf" aria-hidden="true">
+        <span class="wf-title" style="--w:26%"></span>
+        <div class="wf-row"><span class="wf-tab" style="--w:14%"></span><span class="wf-tab" style="--w:14%"></span><span class="wf-tab" style="--w:17%"></span></div>
+        <div class="wf-grid wf-split">
+          <div class="wf-grid wf-three"><div class="wf-card wf-stack"><div class="wf-media" style="--ratio:1"></div><span class="wf-line"></span></div><div class="wf-card wf-stack"><div class="wf-media" style="--ratio:1"></div><span class="wf-line"></span></div><div class="wf-card wf-stack"><div class="wf-media" style="--ratio:1"></div><span class="wf-line"></span></div></div>
+          <div class="wf-card wf-stack"><span class="wf-title" style="--w:61%"></span><div class="wf-media wf-play" style="--ratio:2 / 1"></div><span class="wf-line" style="--w:72%"></span></div>
+        </div>
+      </div>
+    </figure>
+    <ul>
+      <li><strong>История события:</strong> идея, одна-две примечательные детали, несколько фото или видео, отзыв при наличии. Не длинная статья.</li>
+    </ul>
+  </section>
+
+  <section id="articles" aria-labelledby="articles-title">
+    <div class="heading"><span class="num" aria-hidden="true">Б</span><h2 id="articles-title">Полезное</h2></div>
+    <p class="why">Помочь людям, которые пока готовятся к празднику или ищут площадку, и познакомить их с Евгенией через полезный материал.</p>
+    <figure>
+      <div class="wf" aria-hidden="true"><div class="wf-grid wf-split">
+        <div class="wf-stack"><span class="wf-title" style="--w:62%"></span><div class="wf-card wf-grid" style="grid-template-columns:1fr 2fr"><div class="wf-media"></div><div class="wf-stack"><span class="wf-line"></span><span class="wf-line" style="--w:63%"></span></div></div><div class="wf-card wf-grid" style="grid-template-columns:1fr 2fr"><div class="wf-media"></div><div class="wf-stack"><span class="wf-line"></span><span class="wf-line" style="--w:72%"></span></div></div></div>
+        <div class="wf-card wf-stack"><span class="wf-title" style="--w:76%"></span><span class="wf-line"></span><div class="wf-media wf-play" style="--ratio:2 / 1"></div><span class="wf-line" style="--w:67%"></span></div>
+      </div></div>
+    </figure>
+    <ul>
+      <li><strong>Темы:</strong> обзоры площадок Екатеринбурга и Верхней Пышмы, подготовка к свадьбе или юбилею, выбор ведущего.</li>
+      <li>Видео встраиваем в статью, а не выносим в отдельный видеоблог.</li>
+      <li><strong>Идея для привлечения на сайт:</strong> делать из ваших видео статьи, которые отвечают на конкретные вопросы. Например, человек ищет в Яндексе банкетный зал в Верхней Пышме, находит ваш обзор и уже на сайте может посмотреть портфолио или написать вам.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <h2>Евгения, что нужно уточнить для сайта</h2>
+    <h3>Вопросы к вам</h3>
+    <ol>
+      <li><strong>Структура.</strong> Всё ли важное о вашей работе здесь есть? Что вы бы добавили, убрали или показали раньше?</li>
+      <li><strong>Организация.</strong> Если клиент просит организовать праздник под ключ, что вы берёте на себя, а что остаётся за ним? Верно ли в скетче показаны этапы подготовки?</li>
+      <li><strong>Связь.</strong> Куда клиенту удобнее написать вам напрямую? Куда должны приходить заявки с сайта и какие сведения вам нужны для первого ответа?</li>
+      <li><strong>Как привлекать новых посетителей.</strong> Есть идея делать на основе ваших видео полезные статьи, чтобы люди находили сайт через поиск. Какие видео или темы, на ваш взгляд, подойдут для первой статьи?</li>
+    </ol>
+    <h3>Каких материалов нам пока не хватает</h3>
+    <ul>
+      <li><strong>Для первого экрана и знакомства:</strong> несколько портретов на выбор и короткие фрагменты, где вы ведёте праздник, общаетесь с гостями или поёте.</li>
+      <li><strong>Для портфолио:</strong> подборки фото и видео реальных свадеб, юбилеев и корпоративов. К каждому событию — несколько слов о том, что придумали и за что отвечали именно вы. Если сохранились материалы по юбилею «симфония», пришлите их тоже.</li>
+      <li><strong>Для отзывов:</strong> свежие отзывы с пометкой, к какому событию они относятся и как можно подписать автора.</li>
+      <li><strong>Для публикации:</strong> отметьте, какие фото, видео и отзывы можно показывать публично. Если в портфолио хочется назвать компанию или показать её логотип, нужно отдельное разрешение.</li>
+    </ul>
+  </footer>
+</main>
+</body>
+</html>
